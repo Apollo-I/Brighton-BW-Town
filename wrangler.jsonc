@@ -1,0 +1,20 @@
+// Cloudflare Workers configuration — static assets only.
+//
+// This site is a pure Next.js static export (`output: 'export'` in
+// next.config.mjs): `npm run build` prerenders every route into ./out as
+// plain HTML/CSS/JS. Workers serves that directory directly; no OpenNext
+// adapter or SSR worker script is needed (and OpenNext cannot package a
+// static export — it expects a .next/standalone server build).
+//
+// Cloudflare Workers Builds (Git integration) settings:
+//   Build command:    npm run build
+//   Deploy command:   npx wrangler deploy
+{
+  "name": "brighton-bw-town",
+  "compatibility_date": "2026-10-12",
+  "assets": {
+    "directory": "./out",
+    // Serve out/404.html (the designed 404 page) for unknown paths.
+    "not_found_handling": "404-page"
+  }
+}

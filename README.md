@@ -26,6 +26,15 @@ The export in `out/` can be hosted on any static host. Unknown paths serve the
 designed `out/404.html` (Cloudflare Pages, Netlify, and GitHub Pages all do
 this automatically).
 
+### Deploying on Cloudflare Workers
+
+The repo ships a `wrangler.jsonc` that publishes `./out` as static Worker
+assets — no OpenNext/SSR adapter (this site is a static export; OpenNext
+cannot package one and fails looking for `.next/standalone`). In Workers
+Builds (Git integration) set the build command to `npm run build` and the
+deploy command to `npx wrangler deploy`; unknown paths serve `out/404.html`
+via `not_found_handling`.
+
 ## Routes
 
 `/` · `/projects/` · `/projects/[slug]/` · `/leadership/` · `/partnership/` ·
