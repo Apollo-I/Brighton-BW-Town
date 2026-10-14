@@ -17,6 +17,11 @@ npm run build      # production export into out/ (every route is real HTML)
 npm run typecheck
 ```
 
+> **Note:** `npm run build` overwrites the dev server's shared `.next` working
+> directory. If a dev server was running during a build, restart it after
+> clearing `.next` (`rm -rf .next && npm run dev`) — otherwise pages keep
+> referencing dev CSS paths that 404 and the preview renders unstyled.
+
 The export in `out/` can be hosted on any static host. Unknown paths serve the
 designed `out/404.html` (Cloudflare Pages, Netlify, and GitHub Pages all do
 this automatically).
