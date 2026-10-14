@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 380" role="img" aria-label="BW Town">
+  <defs>
+    <clipPath id="emblemClip">
+      <circle cx="1111" cy="185" r="148"/>
+    </clipPath>
+  </defs>
+
+  <!-- BW (navy) -->
+  <text x="30" y="300"
+        font-family="'Arial Black','Arial Bold',Arial,'Helvetica Neue',sans-serif"
+        font-weight="900" font-size="320"
+        fill="#17305E" stroke="#FFFFFF" stroke-width="26"
+        stroke-linejoin="round" paint-order="stroke fill"
+        textLength="660" lengthAdjust="spacingAndGlyphs">BW</text>
+
+  <!-- TOWN (royal blue) — the O is replaced by the emblem below -->
+  <text x="725" y="300"
+        font-family="'Arial Black','Arial Bold',Arial,'Helvetica Neue',sans-serif"
+        font-weight="900" font-size="320"
+        fill="#2F7DE3" stroke="#FFFFFF" stroke-width="26"
+        stroke-linejoin="round" paint-order="stroke fill"
+        textLength="1165" lengthAdjust="spacingAndGlyphs">TOWN</text>
+
+  <!-- Emblem over the O -->
+  <g clip-path="url(#emblemClip)">
+    <!-- gold sky -->
+    <circle cx="1111" cy="185" r="148" fill="#D6A420"/>
+    <!-- sun -->
+    <circle cx="1111" cy="145" r="54" fill="#FFFFFF"/>
+    <g stroke="#FFFFFF" stroke-width="8" stroke-linecap="round">
+      <line x1="1171" y1="145" x2="1246" y2="145"/>
+      <line x1="1169" y1="129" x2="1242" y2="110"/>
+      <line x1="1157" y1="106" x2="1215" y2="58"/>
+      <line x1="1136" y1="91"  x2="1168" y2="23"/>
+      <line x1="1111" y1="85"  x2="1111" y2="10"/>
+      <line x1="1086" y1="91"  x2="1054" y2="23"/>
+      <line x1="1065" y1="106" x2="1007" y2="58"/>
+      <line x1="1053" y1="129" x2="980"  y2="110"/>
+      <line x1="1051" y1="145" x2="976"  y2="145"/>
+    </g>
+    <!-- mountains -->
+    <path d="M 940,262 L 1000,190 L 1040,232 L 1075,198 L 1115,262 Z" fill="#2468CC"/>
+    <path d="M 935,264 L 985,205 L 1030,250 L 1062,222 L 1105,264 Z" fill="#1E5FBF"/>
+    <!-- city skyline -->
+    <rect x="1120" y="196" width="42" height="68" fill="#17408F"/>
+    <rect x="1166" y="166" width="34" height="98" fill="#2B72D8"/>
+    <path d="M 1175,218 a 24 24 0 0 1 48 0 L 1223,264 L 1175,264 Z" fill="#2B72D8"/>
+    <line x1="1199" y1="182" x2="1199" y2="214" stroke="#2B72D8" stroke-width="6"/>
+    <rect x="1210" y="210" width="24" height="54" fill="#17408F"/>
+    <!-- green field -->
+    <path d="M 963,268 Q 1111,240 1259,246 L 1259,333 L 963,333 Z" fill="#2E9E4F"/>
+    <!-- white road -->
+    <path d="M 1052,333 C 1044,300 1058,276 1090,258 C 1102,251 1112,246 1118,243
+             L 1140,248 C 1118,256 1100,268 1090,284 C 1080,300 1082,318 1092,333 Z"
+          fill="#FFFFFF"/>
+  </g>
+  <!-- emblem rings -->
+  <circle cx="1111" cy="185" r="148" fill="none" stroke="#FFFFFF" stroke-width="26"/>
+  <circle cx="1111" cy="185" r="164" fill="none" stroke="#2F7DE3" stroke-width="4"/>
+</svg>

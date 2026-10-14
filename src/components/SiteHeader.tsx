@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { primaryNav, getInvolvedCta, site } from '@/content/site';
+import { Wordmark } from '@/components/Wordmark';
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -35,28 +36,7 @@ export function SiteHeader() {
       <div className="container">
         <div className="header-inner">
           <Link href="/" className="wordmark" aria-label={`${site.name} — home`}>
-            <span className="wordmark-mark" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path
-                  d="M4 19V9.5L12 4l8 5.5V19"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M9 19v-5h6v5"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-            <span className="wordmark-text">
-              Brighton Community
-              <br />
-              Development Partnership
-              <small>Brighton, Alabama</small>
-            </span>
+            <Wordmark />
           </Link>
 
           <nav className="desktop-nav" aria-label="Main">

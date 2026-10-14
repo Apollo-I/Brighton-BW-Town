@@ -1,25 +1,30 @@
 import type { Person } from '@/content/types';
-import { StatusPill, initialsOf } from '@/components/ui';
+import { StatusPill } from '@/components/ui';
+import { Avatar } from '@/components/Avatar';
 
 /**
  * Person card. Public office and partnership role render as separate,
- * labeled fields. Portraits render only when supplied and approved;
- * otherwise a dignified initials placeholder is shown.
+ * labeled fields. Portraits render when sourced (approved, or sourced at the
+ * owner's direction with permission pending); the image falls back to a
+ * dignified initials placeholder if it ever fails to load.
  */
 export function PersonCard({ person }: { person: Person }) {
-  const showPortrait = Boolean(person.portrait) && person.portraitPermissionStatus === 'approved';
+  const showPortrait =
+    Boolean(person.portrait) &&
+    (person.portraitPermissionStatus === 'approved' ||
+      person.portraitPermissionStatus === 'supplied-pending-permission');
+
+  const permissionPending =
+    person.portraitPermissionStatus === 'supplied-pending-permission';
 
   return (
     <article className="person-card">
       <div className="person-card-body">
         <div className="person-card-top">
-          <span className="avatar" aria-hidden="true">
-            {showPortrait && person.portrait ? (
-              <img src={person.portrait} alt="" width={72} height={72} />
-            ) : (
-              initialsOf(person.fullName)
-            )}
-          </span>
+          <Avatar
+            src={showPortrait ? person.portrait : null}
+            fullName={person.fullName}
+          />
           <div>
             <h3>{person.fullName}</h3>
             {person.publicOffice && (
@@ -62,6 +67,14 @@ export function PersonCard({ person }: { person: Person }) {
               </>
             ) : null}
           </span>
+          {showPortrait && person.portraitSourceUrl && (
+            <span>
+              Portrait: {permissionPending ? 'sourced, permission pending — ' : 'approved — '}
+              <a href={person.portraitSourceUrl} rel="noopener noreferrer">
+                view original
+              </a>
+            </span>
+          )}
           {person.verifiedAt && (
             <span>Facts checked: {person.verifiedAt}</span>
           )}

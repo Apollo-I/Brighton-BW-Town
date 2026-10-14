@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360">
+  <defs>
+    <clipPath id="c"><circle cx="180" cy="180" r="148"/></clipPath>
+  </defs>
+  <g clip-path="url(#c)">
+    <circle cx="180" cy="180" r="148" fill="#D6A420"/>
+    <circle cx="180" cy="140" r="54" fill="#FFFFFF"/>
+    <g stroke="#FFFFFF" stroke-width="8" stroke-linecap="round">
+      <line x1="240" y1="140" x2="315" y2="140"/>
+      <line x1="238" y1="124" x2="311" y2="105"/>
+      <line x1="226" y1="101" x2="284" y2="53"/>
+      <line x1="205" y1="86"  x2="237" y2="18"/>
+      <line x1="180" y1="80"  x2="180"  y2="5"/>
+      <line x1="155" y1="86"  x2="123" y2="18"/>
+      <line x1="134" y1="101" x2="76"  y2="53"/>
+      <line x1="122" y1="124" x2="49"  y2="105"/>
+      <line x1="120" y1="140" x2="45"  y2="140"/>
+    </g>
+    <path d="M 9,257 L 69,185 L 109,227 L 144,193 L 184,257 Z" fill="#2468CC"/>
+    <path d="M 4,259 L 54,200 L 99,245 L 131,217 L 174,259 Z" fill="#1E5FBF"/>
+    <rect x="189" y="191" width="42" height="68" fill="#17408F"/>
+    <rect x="235" y="161" width="34" height="98" fill="#2B72D8"/>
+    <path d="M 244,213 a 24 24 0 0 1 48 0 L 292,259 L 244,259 Z" fill="#2B72D8"/>
+    <line x1="268" y1="177" x2="268" y2="209" stroke="#2B72D8" stroke-width="6"/>
+    <rect x="279" y="205" width="24" height="54" fill="#17408F"/>
+    <path d="M 32,263 Q 180,235 328,241 L 328,328 L 32,328 Z" fill="#2E9E4F"/>
+    <path d="M 121,328 C 113,295 127,271 159,253 C 171,246 181,241 187,238
+             L 209,243 C 187,251 169,263 159,279 C 149,295 151,313 161,328 Z"
+          fill="#FFFFFF"/>
+  </g>
+  <circle cx="180" cy="180" r="148" fill="none" stroke="#FFFFFF" stroke-width="26"/>
+  <circle cx="180" cy="180" r="164" fill="none" stroke="#2F7DE3" stroke-width="4"/>
+</svg>

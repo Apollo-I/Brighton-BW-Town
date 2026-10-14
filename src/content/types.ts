@@ -49,6 +49,8 @@ export interface Person {
   bioApproved: boolean;
   portrait: string | null;
   portraitPermissionStatus: PortraitPermissionStatus;
+  /** Where the portrait was sourced from, for public credit. */
+  portraitSourceUrl: string | null;
   /** Initiative role — only meaningful when participationConfirmed is true. */
   partnershipRole: string | null;
   participationConfirmed: boolean;

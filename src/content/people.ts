@@ -22,8 +22,10 @@ export const people: Person[] = [
     publicOfficeVerified: true,
     bio: 'Joseph “JoJo” Edwards Sr. serves as Mayor of Brighton. A U.S. Navy veteran and former Brighton council member, he has a background in building technology and longstanding pastoral and community service. His published biography emphasizes economic stability, public safety, infrastructure, and community collaboration.',
     bioApproved: false,
-    portrait: null,
-    portraitPermissionStatus: 'not-obtained',
+    portrait: '/people/mayor-joseph-edwards-sr-avatar.jpg',
+    portraitPermissionStatus: 'supplied-pending-permission',
+    portraitSourceUrl:
+      'https://jefcomayors.com/wp-content/uploads/2026/02/Mayor-Joseph-JoJo-Edwards-Sr-of-the-City-of-Brighton.jpeg',
     partnershipRole: null,
     participationConfirmed: false,
     evidenceState: 'verified-public-fact',
@@ -33,7 +35,7 @@ export const people: Person[] = [
     publicNote:
       'Biography text on this page is drawn from the mayor’s published biography and is provided for editorial review; it is not an approved statement from the mayor or the city.',
     editorialNote:
-      'Portrait withheld: an approved or supplied image has not been obtained. Use the dignified initials placeholder until permission/supplied imagery is on file. Draft bio is a paraphrase for editorial review, not an approved statement.',
+      'Portrait sourced from the Jefferson County Mayors Association page at the owner’s direction; publication permission to be confirmed with the mayor’s office. Replace with a supplied/approved image when received. Draft bio is a paraphrase for editorial review, not an approved statement.',
   },
   // ---------------------------------------------------------------
   // Editorial research register — NOT certified, NOT published.
@@ -50,6 +52,7 @@ export const people: Person[] = [
     bioApproved: false,
     portrait: null,
     portraitPermissionStatus: 'not-obtained',
+    portraitSourceUrl: null,
     partnershipRole: null,
     participationConfirmed: false,
     evidenceState: 'awaiting-confirmation',
@@ -70,6 +73,7 @@ export const people: Person[] = [
     bioApproved: false,
     portrait: null,
     portraitPermissionStatus: 'not-obtained',
+    portraitSourceUrl: null,
     partnershipRole: null,
     participationConfirmed: false,
     evidenceState: 'awaiting-confirmation',
@@ -90,6 +94,7 @@ export const people: Person[] = [
     bioApproved: false,
     portrait: null,
     portraitPermissionStatus: 'not-obtained',
+    portraitSourceUrl: null,
     partnershipRole: null,
     participationConfirmed: false,
     evidenceState: 'awaiting-confirmation',
@@ -110,6 +115,7 @@ export const people: Person[] = [
     bioApproved: false,
     portrait: null,
     portraitPermissionStatus: 'not-obtained',
+    portraitSourceUrl: null,
     partnershipRole: null,
     participationConfirmed: false,
     evidenceState: 'awaiting-confirmation',
@@ -130,6 +136,7 @@ export const people: Person[] = [
     bioApproved: false,
     portrait: null,
     portraitPermissionStatus: 'not-obtained',
+    portraitSourceUrl: null,
     partnershipRole: null,
     participationConfirmed: false,
     evidenceState: 'awaiting-confirmation',
