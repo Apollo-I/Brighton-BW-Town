@@ -7,6 +7,11 @@ import { PersonCard } from '@/components/PersonCard';
 import { publishedPeople, confirmedPartnershipTeam, confirmedFundOversight } from '@/content/people';
 import { publishedProjects, programAreas } from '@/content/projects';
 
+/** Given a person id, return the projects that list them as a confirmed participant. */
+function projectsForPerson(personId: string, projects: typeof publishedProjects) {
+  return projects.filter((project) => project.confirmedPeople.includes(personId));
+}
+
 export const metadata = {
   title: '',
   description: '',
@@ -128,9 +133,9 @@ export default function LeaderPage({
           {person && person.id && (
             <div style={{ marginTop: '2rem' }}>
               <h3 style={{ color: '#0b233b', fontSize: '1.3rem', fontWeight: '700', marginBottom: '0.8rem' }}>Priority Projects</h3>
-              {publishedProjects.length > 0 ? (
+              {projectsForPerson(person.id, publishedProjects).length > 0 ? (
                 <div className="card-grid card-grid-2" style={{ gap: '1rem' }}>
-                  {publishedProjects.slice(0, 4).map((project) => (
+                  {projectsForPerson(person.id, publishedProjects).slice(0, 4).map((project) => (
                     <article key={project.id} className="card" style={{ border: '1px solid #e2e8f0', borderRadius: '4px', padding: '1rem' }}>
                       <h4 style={{ fontSize: '1rem', fontWeight: '600', color: '#0b233b', marginBottom: '0.5rem' }}>
                         {project.title}

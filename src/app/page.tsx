@@ -1,19 +1,19 @@
-import type { Metadata } from 'next';
+'use client'
+
+import * as React from 'react';
 import Link from 'next/link';
 import { BackgroundArt } from '@/components/BackgroundArt';
 import { LocationDiagram } from '@/components/LocationDiagram';
 import { PartnerStrip } from '@/components/PartnerStrip';
 import { PersonCard } from '@/components/PersonCard';
+import { CompactLeaderCard } from '@/components/CompactLeaderCard';
+import { AvatarRow } from '@/components/AvatarRow';
+import { VisionModal } from '@/components/ui';
 import { EmptyState, StatusNote, StatusPill } from '@/components/ui';
+import type { Person } from '@/content/types';
 import { publishedPeople } from '@/content/people';
 import { publishedProjects, programAreas } from '@/content/projects';
 import { site } from '@/content/site';
-
-export const metadata: Metadata = {
-  title: 'Brighton Community Development Partnership — Brighton, Alabama',
-  description:
-    'A proposed community partnership for Brighton, Alabama: turning local priorities into practical projects with clear leadership, transparent funding, and room for residents, businesses, and partners to take part.',
-};
 
 const benefits = [
   {
@@ -94,6 +94,34 @@ export default function HomePage() {
   const mayor = publishedPeople.find((p) =>
     (p.publicOffice ?? '').toLowerCase().includes('mayor')
   );
+  const [disclosureOpen, setDisclosureOpen] = React.useState(false);
+  const [visionOpen, setVisionOpen] = React.useState(false);
+  const [visionPerson, setVisionPerson] = React.useState<typeof mayor | null>(null);
+
+  function showVisionModal(person: typeof mayor) {
+    setVisionPerson(person);
+    setVisionOpen(true);
+  }
+
+  // Compact leadership cards for the hero-adjacent section — up to 6 featured
+  const featuredLeaders = publishedPeople.slice(0, 6);
+
+  /** Returns the Person record for a given id, or null. */
+  function personById(id: string) {
+    return publishedPeople.find((p) => p.id === id) ?? null;
+  }
+
+  /** Up to 4 confirmed participants shown as overlapping avatars. */
+  function participantAvatars(project: typeof publishedProjects[0]) {
+    const confirmed: Person[] = [];
+    for (const id of project.confirmedPeople) {
+      const p = personById(id);
+      if (p) confirmed.push(p);
+    }
+    const visible = confirmed.slice(0, 4);
+    const extra = confirmed.length - 4;
+    return { visible: visible as Person[], extra };
+  }
 
   return (
     <>
@@ -101,17 +129,66 @@ export default function HomePage() {
       <section className="hero">
         <BackgroundArt variant="hero" />
         <div className="container hero-inner">
-          <span className="eyebrow">
-            Brighton, Alabama • Community Development
+          <span className="hero-eyebrow" aria-hidden="true">
+            Building a Brighter Future
           </span>
           <h1>
-            More opportunity. Stronger neighborhoods. A brighter Brighton.
+            More Opportunities.
+            <br />
+            Stronger Towns.
+            <br />
+            Brighter Futures.
           </h1>
-          <p className="lede">
+          <p className="hero-lede">
             A proposed community partnership bringing residents, businesses,
-            civic leaders, and development partners together to turn
-            Brighton&apos;s priorities into practical projects.
+            and civic leaders together to turn local priorities into practical
+            projects.
           </p>
+          {/* Compact partnership status disclosure switch */}
+          <div className="hero-disclosure-row">
+            <button
+              type="button"
+              className="disclosure-trigger"
+              aria-expanded={disclosureOpen}
+              aria-controls="partnership-disclosure"
+              onClick={() => setDisclosureOpen((v) => !v)}
+            >
+              <span aria-hidden="true">About this partnership</span>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+                style={{
+                  transform: disclosureOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                  transition: 'transform 0.2s ease',
+                }}
+              >
+                <path
+                  d="M6 9l6 6 6-6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+            {disclosureOpen && (
+              <div
+                id="partnership-disclosure"
+                className="disclosure-panel"
+                role="region"
+                aria-labelledby="disc-trigger"
+              >
+                <p>
+                  Partnership development is underway. Participation, project
+                  roles, and funding are confirmed individually. This website
+                  will be updated as arrangements are documented.
+                </p>
+              </div>
+            )}
+          </div>
           <div className="btn-row">
             <Link href="/projects/" className="btn btn-onnavy">
               Explore the Projects
@@ -120,9 +197,53 @@ export default function HomePage() {
               Become a Partner
             </Link>
           </div>
-          <div className="hero-status">
-            <StatusNote>{site.statusNote}</StatusNote>
+          <a
+            href="#leadership"
+            className="hero-leadership-link"
+          >
+            Meet Your Town Leaders <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+      </section>
+
+      {/* ================= SECTION A2 — LEADERSHIP ================= */}
+      <section
+        className="section band-ivory-deep"
+        aria-labelledby="leadership-heading"
+        id="leadership"
+      >
+        <div className="container">
+          <div className="section-head">
+            <span className="eyebrow">Town Leaders at Work</span>
+            <h2 id="leadership-heading">Meet the people serving our community—and explore their vision for its future.</h2>
           </div>
+
+          {featuredLeaders.length > 0 ? (
+            <>
+              <div className="card-grid compact-grid">
+                {featuredLeaders.map((person) => (
+                  <CompactLeaderCard
+                    key={person.id}
+                    person={person}
+                    showVisionModal={showVisionModal}
+                    visionOpen={visionOpen}
+                    visionPerson={visionPerson ?? null}
+                  />
+                ))}
+              </div>
+              {featuredLeaders.length > 0 && (
+                <div style={{ marginTop: '1.6rem', textAlign: 'center' }}>
+                  <Link href="/leadership/" className="text-link">
+                    View All Leaders
+                  </Link>
+                </div>
+              )}
+            </>
+          ) : (
+            <EmptyState title="Civic leadership records are being verified">
+              <p>Verified public officials will be listed here.</p>
+            </EmptyState>
+          )}
         </div>
       </section>
 
@@ -163,25 +284,33 @@ export default function HomePage() {
 
           {featuredProjects.length > 0 ? (
             <div className="card-grid card-grid-3">
-              {featuredProjects.map((project) => (
-                <article key={project.id} className="card">
-                  <div style={{ marginBottom: '0.8rem' }}>
-                    <StatusPill tone="planning">{project.status}</StatusPill>
-                  </div>
-                  <h3>
+              {featuredProjects.map((project) => {
+                const { visible, extra } = participantAvatars(project);
+                return (
+                  <article key={project.id} className="card">
+                    <div style={{ marginBottom: '0.8rem' }}>
+                      <StatusPill tone="planning">{project.status}</StatusPill>
+                    </div>
+                    <h3>
+                      <Link
+                        href={`/projects/${project.slug}/`}
+                        style={{ color: 'inherit', textDecoration: 'none' }}
+                      >
+                        {project.title}
+                      </Link>
+                    </h3>
+                    <p className="text-soft">{project.summary}</p>
+                    <AvatarRow people={visible} extra={extra} />
                     <Link
                       href={`/projects/${project.slug}/`}
-                      style={{ color: 'inherit', textDecoration: 'none' }}
+                      className="text-link"
+                      style={{ marginTop: '0.6rem' }}
                     >
-                      {project.title}
+                      View project
                     </Link>
-                  </h3>
-                  <p className="text-soft">{project.summary}</p>
-                  <Link href={`/projects/${project.slug}/`} className="text-link">
-                    View project
-                  </Link>
-                </article>
-              ))}
+                  </article>
+                );
+              })}
             </div>
           ) : (
             <EmptyState title="Initial project priorities are being developed with local stakeholders">
@@ -367,6 +496,14 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <VisionModal
+        isOpen={visionOpen}
+        onClose={() => setVisionOpen(false)}
+        vision={visionPerson?.visionStatement ?? null}
+        fullName={visionPerson?.fullName ?? ''}
+        portrait={visionPerson?.portrait ?? null}
+      />
     </>
   );
 }
