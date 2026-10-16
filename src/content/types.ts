@@ -63,6 +63,10 @@ export interface Person {
   publicNote?: string;
   /** Internal-only editorial note. Never rendered publicly. */
   editorialNote?: string;
+  /** Approved vision statement for the community. Null means it is awaiting contribution. */
+  visionStatement?: string | null;
+  /** URL to an approved video or additional photograph. */
+  visionVideoUrl?: string | null;
 }
 
 export interface Milestone {

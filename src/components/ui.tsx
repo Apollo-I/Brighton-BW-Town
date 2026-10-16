@@ -124,3 +124,115 @@ export function initialsOf(fullName: string): string {
   const last = parts.length > 1 ? parts[parts.length - 1][0] : '';
   return (first + last).toUpperCase() || '?';
 }
+
+/** Vision statement modal for leader cards */
+export interface VisionModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  vision: string | null;
+  fullName: string;
+  portrait: string | null;
+}
+
+export function VisionModal({ isOpen, onClose, vision, fullName, portrait }: VisionModalProps) {
+  const actualVision = vision || 'Vision statement awaiting contribution.';
+
+  return (
+    <div className="vision-modal-overlay"
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        background: 'rgba(0,0,0,0.5)',
+        display: isOpen ? 'flex' : 'none',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 2000,
+        padding: '1rem',
+      }}
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      aria-label="vision statement"
+    >
+      <div
+        className="vision-modal"
+        style={{
+          background: 'white',
+          borderRadius: '8px',
+          width: '90%',
+          maxWidth: '500px',
+          maxHeight: '80%',
+          overflow: 'auto',
+          position: 'relative',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+          animation: 'fadeIn 0.3s ease',
+        }}
+      >
+        <button
+          style={{
+            position: 'absolute',
+            top: '1rem',
+            right: '1rem',
+            background: 'none',
+            border: 'none',
+            fontSize: '1.5rem',
+            cursor: 'pointer',
+            color: '#666',
+          }}
+          onClick={() => onClose()}
+          aria-label="Close vision modal"
+        >
+          ×
+        </button>
+
+        <div style={{ textAlign: 'center', padding: '2rem' }}>
+          {portrait && (
+            <img
+              src={portrait}
+              alt={`Portrait of ${fullName}`}
+              style={{
+                width: '120px',
+                height: '120px',
+                borderRadius: '50%',
+                objectFit: 'cover',
+                margin: '0 auto 1rem',
+                border: '3px solid #e2e8f0',
+              }}
+            />
+          )}
+
+          <h3 style={{ margin: '0.5rem 0', fontSize: '1.4rem', fontWeight: '700', color: '#0b233b' }}>
+            {fullName}
+          </h3>
+
+          <p style={{ margin: '0.8rem 0', fontSize: '1rem', lineHeight: '1.6', color: '#334155' }}>
+            {actualVision}
+          </p>
+
+          <div style={{ padding: '0 1rem 1rem', textAlign: 'center' }}>
+            <a
+              href="/leadership/"
+              style={{
+                marginTop: '1rem',
+                display: 'inline-block',
+                padding: '0.6rem 1.2rem',
+                background: '#3182ce',
+                color: 'white',
+                fontSize: '0.95rem',
+                fontWeight: '600',
+                borderRadius: '4px',
+                textDecoration: 'none',
+                transition: 'background 0.2s',
+              }}
+              onMouseOver={(e) => {(e.currentTarget as HTMLElement).style.background = '#2c5aa0';}}
+              onMouseOut={(e) => {(e.currentTarget as HTMLElement).style.background = '#3182ce';}}
+            >
+              View Full Profile
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

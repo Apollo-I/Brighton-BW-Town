@@ -32,6 +32,8 @@ export const people: Person[] = [
     sourceUrl: 'https://jefcomayors.com/our-mayors/',
     verifiedAt: '2026-10-14',
     publish: true,
+    visionStatement: 'Vision statement awaiting contribution.',
+    visionVideoUrl: null,
     publicNote:
       'Biography text on this page is drawn from the mayor’s published biography and is provided for editorial review; it is not an approved statement from the mayor or the city.',
     editorialNote:
